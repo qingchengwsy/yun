@@ -1,6 +1,7 @@
 package com.daiqi.yun.controller;
 
 import com.daiqi.yun.service.TypeService;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,4 +18,6 @@ public class TypeController {
 
     @Autowired
     private TypeService typeService;
+
+
 }

@@ -17,7 +17,7 @@ import java.util.stream.Stream;
 
 @Getter
 @AllArgsConstructor
-public enum TypeStatusConstant {
+public enum TypeStatusConstant{
 
     STATUS_OPEN(1,"开启"),
     STATUS_CLOSE(2,"关闭");
