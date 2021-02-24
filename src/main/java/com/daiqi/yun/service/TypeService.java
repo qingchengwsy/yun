@@ -22,13 +22,13 @@ public interface TypeService {
     List<ClassificationType> findTopByUserId(String userId);
 
     /**
-    * @Description: 根据用户和父类id查询下级id
+    * @Description: 根据父类id查询下级id
     * @Param: [userId, parentId]
     * @return: java.util.List<com.daiqi.yun.entity.ClassificationType>
     * @Author: Su.Qing
     * @Date: 2021/2/18
     */
-    List<ClassificationType> findSubordinateByUserIdAndParentId(Long parentId);
+    List<ClassificationType> findSubordinateByParentId(Long parentId);
 
     /**
     * @Description: 新增分类

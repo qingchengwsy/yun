@@ -13,6 +13,7 @@ import com.daiqi.yun.service.HistoryService;
 import com.daiqi.yun.service.InfoService;
 import com.daiqi.yun.vo.ResponseVo;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @create: 2021-02-18 14:23
  **/
 @Service
+@DubboService
 @Slf4j
 public class InfoImpl implements InfoService {
 
@@ -37,14 +39,14 @@ public class InfoImpl implements InfoService {
 
     @Override
     public ResponseVo<ClassificationInfo> getInfoByUserIdAndTypeId(Long page, Long rows, String userId, Long typeId) {
-        ResponseVo<ClassificationInfo> responseVo=null;
+        ResponseVo<ClassificationInfo> responseVo = null;
         LambdaQueryWrapper<ClassificationInfo> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(ClassificationInfo::getUserId, userId)
                 .eq(typeId != null, ClassificationInfo::getTypeId, typeId);
-        IPage<ClassificationInfo> pageHelper=new Page<>(page,rows);
+        IPage<ClassificationInfo> pageHelper = new Page<>(page, rows);
         pageHelper = infoDao.selectPage(pageHelper, wrapper);
-        if (CollectionUtil.isNotEmpty(pageHelper.getRecords())){
-            responseVo=new ResponseVo<>();
+        if (CollectionUtil.isNotEmpty(pageHelper.getRecords())) {
+            responseVo = new ResponseVo<>();
             responseVo.setCurrent(pageHelper.getCurrent());
             responseVo.setPages(pageHelper.getPages());
             responseVo.setSize(pageHelper.getSize());
@@ -59,7 +61,6 @@ public class InfoImpl implements InfoService {
         return infoDao.selectById(id);
     }
 
-    @Transactional
     @Override
     public boolean addInfo(ClassificationInfo info) {
         if (infoDao.insert(info) == 1) {
@@ -70,6 +71,10 @@ public class InfoImpl implements InfoService {
 
     @Override
     public boolean updateInfo(Long id, Long typeId, String description) {
+        if (typeId == null && StrUtil.isBlank(description)) {
+            log.error("分类菜单和备注必须一项不为null");
+            return false;
+        }
         LambdaUpdateWrapper<ClassificationInfo> wrapper = new LambdaUpdateWrapper<>();
         wrapper.eq(ClassificationInfo::getId, id)
                 .set(typeId != null, ClassificationInfo::getTypeId, typeId)
@@ -77,7 +82,6 @@ public class InfoImpl implements InfoService {
         return infoDao.update(null, wrapper) == 1;
     }
 
-    @Transactional
     @Override
     public boolean deleteInfo(Long id) {
         ClassificationInfo info = infoDao.selectById(id);

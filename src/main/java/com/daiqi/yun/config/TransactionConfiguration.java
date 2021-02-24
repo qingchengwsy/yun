@@ -36,7 +36,6 @@ public class TransactionConfiguration {
     @Autowired
     private TransactionManager transactionManager;
 
-
     /**
      * 配置事务拦截器
      */
