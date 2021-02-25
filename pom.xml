@@ -5,7 +5,6 @@
     <packaging>pom</packaging>
     <modules>
         <module>yun-api</module>
-        <module>yun-entity</module>
         <module>yun-service</module>
     </modules>
     <parent>
@@ -21,6 +20,14 @@
     <description>云自选功能</description>
 
     <properties>
+        <!--设置项目编码-->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+        <!--设置JDK 版本-->
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+
         <java.version>1.8</java.version>
         <mysql.version>5.1.32</mysql.version>
         <druid.version>1.2.1</druid.version>
@@ -48,18 +55,6 @@
                 <version>${spring.cloud.alibaba.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
-            </dependency>
-
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-web</artifactId>
-            </dependency>
-
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-devtools</artifactId>
-                <scope>runtime</scope>
-                <optional>true</optional>
             </dependency>
 
             <!-- https://mvnrepository.com/artifact/com.alibaba/druid-spring-boot-starter -->
@@ -93,26 +88,7 @@
                 <artifactId>aspectjweaver</artifactId>
                 <version>${aop.version}</version>
             </dependency>
-
         </dependencies>
     </dependencyManagement>
-
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <exclude>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                        </exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>

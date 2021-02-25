@@ -38,7 +38,7 @@ public class TypeDto implements Serializable {
     private String feileiZhushi;
 
     /**状态*/
-    private TypeStatusConstant status;
+    private Integer status;
 
     /**创建时间*/
     private Timestamp createTime;

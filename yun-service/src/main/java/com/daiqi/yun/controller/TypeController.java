@@ -1,5 +1,8 @@
 package com.daiqi.yun.controller;
 
+import com.daiqi.yun.api.InfoApi;
+import com.daiqi.yun.api.TypeApi;
+import com.daiqi.yun.dto.InfoDto;
 import com.daiqi.yun.dto.TypeDto;
 import com.daiqi.yun.service.TypeService;
 import org.apache.dubbo.config.annotation.DubboReference;
@@ -19,9 +22,5 @@ import java.util.List;
 @RequestMapping("type")
 public class TypeController {
 
-    @GetMapping("get")
-    public List<TypeDto> get(){
-      return null;
-    }
 
 }

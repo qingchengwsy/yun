@@ -1,23 +1,29 @@
 server:
   port: 8081
   servlet:
-    context-path: /daiqi-com.daiqi.yun
+    context-path: /daiqi-yun
 spring:
   application:
-    name: daiqi-com.daiqi.yun
+    name: daiqi-yun
   profiles:
-    active: dev
+    active: pro
   cloud:
     nacos:
+      discovery:
+        username: nacos
+        password: DAa4tHPgwoQbKOCR
       config:
         username: nacos
-        password: nacos
+        password: DAa4tHPgwoQbKOCR
+  main:
+    allow-bean-definition-overriding: true
+
 dubbo:
   protocol:
-    port: -1
+    port: 28802
     name: dubbo
   scan:
-    base-packages: com.daiqi.com.daiqi.yun.service
+    base-packages: com.daiqi.yun.service
 
 ---
 spring:
@@ -27,14 +33,15 @@ spring:
       config:
         server-addr: localhost:8848
         file-extension: yaml
-        namespace: 8eb831ad-44f8-40b0-abd1-65e042db9609
       discovery:
         server-addr: localhost:8848
-        namespace: 8eb831ad-44f8-40b0-abd1-65e042db9609
+        ip: localhost
 dubbo:
   registry:
     address: spring-cloud://localhost
-
+    check: false
+  protocol:
+    host: localhost
 ---
 spring:
   profiles: pro
@@ -42,9 +49,13 @@ spring:
     nacos:
       config:
         server-addr: 47.100.126.254:8848
-        file-extension: yml
+        file-extension: yaml
       discovery:
         server-addr: 47.100.126.254:8848
+        ip: 10.0.5.5
 dubbo:
   registry:
     address: spring-cloud://47.100.126.254
+    check: false
+  protocol:
+    host: 10.0.5.5

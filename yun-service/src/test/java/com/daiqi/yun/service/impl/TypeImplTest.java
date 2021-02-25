@@ -39,7 +39,7 @@ class TypeImplTest {
         type.setFeileiName("理财");
         type.setIsParent(0L);
         type.setUserId(USER_ID);
-        type.setStatus(TypeStatusConstant.STATUS_OPEN);
+        type.setStatus(1);
         boolean insert = typeService.addType(type);
         Assert.isTrue(insert);
     }

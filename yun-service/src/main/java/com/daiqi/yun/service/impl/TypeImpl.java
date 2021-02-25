@@ -5,6 +5,8 @@ import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.daiqi.yun.api.TypeApi;
+import com.daiqi.yun.constant.TypeStatusConstant;
 import com.daiqi.yun.dto.TypeDto;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboService;
@@ -25,9 +27,9 @@ import java.util.stream.Collectors;
  * @create: 2021-02-18 14:25
  **/
 @Service
-@DubboService
+@DubboService(interfaceClass = TypeApi.class)
 @Slf4j
-public class TypeImpl implements TypeService {
+public class TypeImpl implements TypeService, TypeApi {
 
     @Autowired
     private TypeDao typeDao;
@@ -124,7 +126,7 @@ public class TypeImpl implements TypeService {
                 type.getFeileiName(),
                 type.getIsParent(),
                 type.getFeileiZhushi(),
-                type.getStatus(),
+                type.getStatus().getCode(),
                 type.getCreateTime()
         );
     }

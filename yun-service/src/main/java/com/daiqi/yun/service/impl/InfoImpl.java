@@ -19,6 +19,8 @@ import com.daiqi.yun.entity.ClassificationInfo;
 import com.daiqi.yun.service.HistoryService;
 import com.daiqi.yun.service.InfoService;
 
+import java.util.stream.Collectors;
+
 
 /**
  * @program: com.daiqi.yun
@@ -27,7 +29,7 @@ import com.daiqi.yun.service.InfoService;
  * @create: 2021-02-18 14:23
  **/
 @Service
-@DubboService
+@DubboService(interfaceClass = InfoApi.class)
 @Slf4j
 public class InfoImpl implements InfoService, InfoApi {
 
@@ -40,8 +42,8 @@ public class InfoImpl implements InfoService, InfoApi {
     }
 
     @Override
-    public ResponseVo<ClassificationInfo> getInfoByUserIdAndTypeId(Long page, Long rows, String userId, Long typeId) {
-        ResponseVo<ClassificationInfo> responseVo = null;
+    public ResponseVo<InfoDto> getInfoByUserIdAndTypeId(Long page, Long rows, String userId, Long typeId) {
+        ResponseVo<InfoDto> responseVo = null;
         LambdaQueryWrapper<ClassificationInfo> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(ClassificationInfo::getUserId, userId)
                 .eq(typeId != null, ClassificationInfo::getTypeId, typeId);
@@ -53,7 +55,8 @@ public class InfoImpl implements InfoService, InfoApi {
             responseVo.setPages(pageHelper.getPages());
             responseVo.setSize(pageHelper.getSize());
             responseVo.setTotal(pageHelper.getTotal());
-            responseVo.setRecord(pageHelper.getRecords());
+            responseVo.setRecord(pageHelper.getRecords().stream()
+                    .map(this::infoToInfoDto).collect(Collectors.toList()));
         }
         return responseVo;
     }
@@ -112,10 +115,5 @@ public class InfoImpl implements InfoService, InfoApi {
                 info.getBeizhu(),
                 info.getCreateTime()
         );
-    }
-
-    @Override
-    public String get() {
-        return "1111111111";
     }
 }
