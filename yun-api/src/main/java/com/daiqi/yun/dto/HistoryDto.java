@@ -45,7 +45,7 @@ public class HistoryDto implements Serializable {
     private String beizhu;
 
     /**状态*/
-    private HistoryStatusConstant status;
+    private Integer status;
 
     /**创建时间*/
     private Timestamp createTime;

@@ -17,8 +17,8 @@ spring:
 
 logging:
   level:
-    com.daiqi.yun: info
+    com.daiqi.yun: debug
 mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
-  type-enums-package: com.daiqi.com.daiqi.yun.constant
+  type-enums-package: com.daiqi.yun.constant

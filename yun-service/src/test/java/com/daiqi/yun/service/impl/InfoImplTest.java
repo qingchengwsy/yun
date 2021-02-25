@@ -2,9 +2,8 @@ package com.daiqi.yun.service.impl;
 
 import cn.hutool.core.lang.Assert;
 import com.daiqi.yun.dto.InfoDto;
-import com.daiqi.yun.entity.ClassificationInfo;
 import com.daiqi.yun.vo.ResponseVo;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.daiqi.yun.service.InfoService;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,7 +20,7 @@ class InfoImplTest {
 
     @Test
     void getInfoByUserIdAndTypeId() {
-        ResponseVo<ClassificationInfo> info = infoService.getInfoByUserIdAndTypeId(1L, 10L, USER_ID, 32L);
+        ResponseVo<InfoDto> info = infoService.getInfoByUserIdAndTypeId(1L, 10L, USER_ID, 32L);
         System.out.println(info);
         Assert.notEmpty(info.getRecord());
     }

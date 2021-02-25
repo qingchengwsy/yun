@@ -20,7 +20,7 @@ public interface InfoService {
     * @Author: Su.Qing
     * @Date: 2021/2/19
     */
-    ResponseVo<ClassificationInfo> getInfoByUserIdAndTypeId(Long page, Long rows, String userId, Long typeId);
+    ResponseVo<InfoDto> getInfoByUserIdAndTypeId(Long page, Long rows, String userId, Long typeId);
 
     /**
     * @Description: 根据股票代码获取某个自选信息
